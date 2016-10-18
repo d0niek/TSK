@@ -6,15 +6,13 @@
 #pragma hdrstop
 #endif  // __BORLANDC__
 
-#include "./app.h"
-#include "./main.h"
+#include "./MainApp.h"
+#include "./MainFrame.h"
 
 IMPLEMENT_APP(MainApp);
 
 bool MainApp::OnInit() {
-    MainFrame* frame = new MainFrame(0L, _("wxWidgets Application Template"));
-
+    MainFrame* frame = new MainFrame("TSK 2016", wxDefaultPosition, wxSize(800, 450));
     frame->Show();
-
     return true;
 }

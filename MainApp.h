@@ -1,5 +1,5 @@
-#ifndef APP_H
-#define APP_H
+#ifndef MAINAPP_H
+#define MAINAPP_H
 
 #include <wx/app.h>
 
@@ -9,4 +9,4 @@ class MainApp : public wxApp
         virtual bool OnInit();
 };
 
-#endif // APP_H
+#endif // MAINAPP_H

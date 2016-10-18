@@ -6,65 +6,29 @@
 #pragma hdrstop
 #endif  // __BORLANDC__
 
-#include "./main.h"
+#include "./MainFrame.h"
 
 // helper functions
-enum wxbuildinfoformat {
-    short_f, long_f
-};
-
-wxString wxbuildinfo(wxbuildinfoformat format) {
-    wxString wxbuild(wxVERSION_STRING);
-
-    if (format == long_f) {
-#if defined(__WXMSW__)
-        wxbuild << _T("-Windows");
-#elif defined(__WXMAC__)
-        wxbuild << _T("-Mac");
-#elif defined(__UNIX__)
-        wxbuild << _T("-Linux");
-#endif
-
-#if wxUSE_UNICODE
-        wxbuild << _T("-Unicode build");
-#else
-        wxbuild << _T("-ANSI build");
-#endif  // wxUSE_UNICODE
-    }
-
-    return wxbuild;
-}
+wxMenuBar* BuildMenuBar();
+wxString GetBuildInfo();
+// END helper functions
 
 BEGIN_EVENT_TABLE(MainFrame, wxFrame)
     EVT_CLOSE(MainFrame::OnClose)
-    EVT_MENU(idMenuQuit, MainFrame::OnQuit)
-    EVT_MENU(idMenuAbout, MainFrame::OnAbout)
+    EVT_MENU(wxID_EXIT, MainFrame::OnQuit)
+    EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
 END_EVENT_TABLE()
 
-MainFrame::MainFrame(wxFrame *frame, const wxString& title)
-    : wxFrame(frame, -1, title) {
-#if wxUSE_MENUS
-    // create a menu bar
-    wxMenuBar* mbar = new wxMenuBar();
-    wxMenu* fileMenu = new wxMenu(_T(""));
-    fileMenu->Append(idMenuQuit, _("&Quit\tAlt-F4"), _("Quit the application"));
-    mbar->Append(fileMenu, _("&File"));
+MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
+    : wxFrame(NULL, wxID_ANY, title, pos, size) {
 
-    wxMenu* helpMenu = new wxMenu(_T(""));
-    helpMenu->Append(idMenuAbout, _("&About\tF1"), _("Show info about this application"));
-    mbar->Append(helpMenu, _("&Help"));
+    wxMenuBar* menuBar = BuildMenuBar();
+    SetMenuBar(menuBar);
 
-    SetMenuBar(mbar);
-#endif  // wxUSE_MENUS
-
-#if wxUSE_STATUSBAR
-    // create a status bar with some information about the used wxWidgets version
     CreateStatusBar(2);
-    SetStatusText(_("Hello Code::Blocks user!"), 0);
-    SetStatusText(wxbuildinfo(short_f), 1);
-#endif  // wxUSE_STATUSBAR
+    SetStatusText(_("Hello user!"), 0);
+    SetStatusText(GetBuildInfo(), 1);
 }
-
 
 MainFrame::~MainFrame() {
 }
@@ -78,6 +42,49 @@ void MainFrame::OnQuit(wxCommandEvent &event) {
 }
 
 void MainFrame::OnAbout(wxCommandEvent &event) {
-    wxString msg = wxbuildinfo(long_f);
-    wxMessageBox(msg, _("Welcome to..."));
+    wxString message;
+
+    message << "Technologie Symulacji Komputerowych 2016.\n";
+    message << "Symulacja pozaru lasu.\n\n";
+    message << "Copyright Bogna Dudaczyk, Damian Glinkowski";
+
+    wxMessageBox(
+        message,
+        _("Welcome to..."));
 }
+
+// helper functions
+wxMenuBar* BuildMenuBar() {
+    wxMenu* fileMenu = new wxMenu(_T(""));
+    fileMenu->Append(wxID_EXIT, _("&Quit\tAlt-F4"), _("Quit the application"));
+
+    wxMenu* helpMenu = new wxMenu(_T(""));
+    helpMenu->Append(wxID_ABOUT, _("&About...\tF1"), _("Show info about this application"));
+
+    wxMenuBar* menuBar = new wxMenuBar();
+    menuBar->Append(fileMenu, _("&File"));
+    menuBar->Append(helpMenu, _("&Help"));
+
+    return menuBar;
+}
+
+wxString GetBuildInfo() {
+    wxString wxbuild(wxVERSION_STRING);
+
+#if defined(__WXMSW__)
+        wxbuild << _T("-Windows");
+#elif defined(__WXMAC__)
+        wxbuild << _T("-Mac");
+#elif defined(__UNIX__)
+        wxbuild << _T("-Linux");
+#endif
+
+#if wxUSE_UNICODE
+        wxbuild << _T("-Unicode build");
+#else
+        wxbuild << _T("-ANSI build");
+#endif
+
+    return wxbuild;
+}
+// END helper functions
