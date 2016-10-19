@@ -13,10 +13,21 @@ class MainFrame: public wxFrame
         MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
         ~MainFrame();
 
+        enum {
+            idButtonStart = 1000,
+            idButtonReset,
+            idSelectWind
+        };
+
     private:
+        int menuPosX;
+
         void OnClose(wxCloseEvent &event);
         void OnQuit(wxCommandEvent &event);
         void OnAbout(wxCommandEvent &event);
+
+        void OnButtonStart(wxCommandEvent &event);
+        void OnButtonReset(wxCommandEvent &event);
 
         DECLARE_EVENT_TABLE()
 };
