@@ -3,7 +3,7 @@
 rm -rf obj bin
 
 wx_flags=$(wx-config --cxxflags)
-wx_libs=$(wx-config --libs)
+wx_libs=$(wx-config --libs --gl-libs)
 
 cpp_files=$(find . -type f -name "*.cpp")
 for file in $cpp_files
@@ -22,4 +22,4 @@ done
 o_files=$(find obj/ -type f -name "*.o")
 
 mkdir bin
-g++ -o bin/app $o_files $wx_libs
+g++ -o bin/app -lGL -lGLU $o_files $wx_libs

@@ -1,35 +1,29 @@
 #ifndef MAINFRAME_H
 #define MAINFRAME_H
 
-#ifndef WX_PRECOMP
-    #include <wx/wx.h>
-#endif
+#include <wx/wx.h>
 
 #include "./MainApp.h"
+#include "./src/ViewWindow.h"
+#include "./src/ControlPanel.h"
 
-class MainFrame: public wxFrame
+class MainFrame : public wxFrame
 {
+    private:
+        ViewWindow *viewWindow;
+        ControlPanel *controlPanel;
+
+        void BuildMenuBar();
+
     public:
         MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
-        ~MainFrame();
 
-        enum {
-            idButtonStart = 1000,
-            idButtonReset,
-            idSelectWind
-        };
+        ViewWindow *GetViewWindow();
+        ControlPanel *GetControlPanel();
 
-    private:
-        int menuPosX;
-
-        void OnClose(wxCloseEvent &event);
+        // events
         void OnQuit(wxCommandEvent &event);
         void OnAbout(wxCommandEvent &event);
-
-        void OnButtonStart(wxCommandEvent &event);
-        void OnButtonReset(wxCommandEvent &event);
-
-        DECLARE_EVENT_TABLE()
 };
 
 #endif // MAINFRAME_H

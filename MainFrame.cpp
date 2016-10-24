@@ -1,74 +1,52 @@
-#ifdef WX_PRECOMP
-    #include "wx_pch.h"
-#endif
-
-#ifdef __BORLANDC__
-#pragma hdrstop
-#endif  // __BORLANDC__
 
 #include "./MainFrame.h"
-
-#define MENU_WIDTH 300
-
-// helper functions
-wxMenuBar* BuildMenuBar();
-wxString GetBuildInfo();
-// END helper functions
-
-BEGIN_EVENT_TABLE(MainFrame, wxFrame)
-    EVT_CLOSE(MainFrame::OnClose)
-    EVT_MENU(wxID_EXIT, MainFrame::OnQuit)
-    EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
-    EVT_BUTTON(idButtonStart, MainFrame::OnButtonStart)
-    EVT_BUTTON(idButtonReset, MainFrame::OnButtonReset)
-END_EVENT_TABLE()
 
 MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     : wxFrame(NULL, wxID_ANY, title, pos, size) {
 
-    menuPosX = size.GetWidth() - MENU_WIDTH;
+    BuildMenuBar();
 
-    wxButton* buttonStart = new wxButton(this, idButtonStart, "Start");
-    wxButton* buttonReset = new wxButton(this, idButtonReset, "Reset");
-    int space = (MENU_WIDTH - buttonStart->GetSize().GetWidth() - buttonReset->GetSize().GetWidth()) / 3;
-    buttonStart->SetPosition(wxPoint(menuPosX + space, 10));
-    buttonReset->SetPosition(wxPoint(menuPosX + space + buttonStart->GetSize().GetWidth() + space, 10));
+    wxPanel *mainPanel = new wxPanel(this, -1);
+    wxBoxSizer *mainBox = new wxBoxSizer(wxHORIZONTAL);
 
-    wxArrayString winds;
-    winds.Add("N");
-    winds.Add("NE");
-    winds.Add("E");
-    winds.Add("SE");
-    winds.Add("S");
-    winds.Add("SW");
-    winds.Add("W");
-    winds.Add("NW");
-    wxComboBox* combo = new wxComboBox(
-        this,
-        idSelectWind,
-        "N",
-        wxPoint(menuPosX, 50),
-        wxDefaultSize,
-        winds,
-        wxCB_DROPDOWN);
+    int args[] = { WX_GL_RGBA, WX_GL_DOUBLEBUFFER, WX_GL_DEPTH_SIZE, 16, 0 };
+    viewWindow = new ViewWindow(mainPanel, args);
+    mainBox->Add(viewWindow, 1, wxEXPAND);
 
-    wxMenuBar* menuBar = BuildMenuBar();
+    controlPanel = new ControlPanel(mainPanel);
+    mainBox->Add(controlPanel);
+
+    mainPanel->SetSizer(mainBox);
+
+    Centre();
+}
+
+void MainFrame::BuildMenuBar() {
+    wxMenuBar* menuBar = new wxMenuBar();
+
+    wxMenu* fileMenu = new wxMenu;
+    fileMenu->Append(wxID_EXIT, _("&Quit\tAlt-F4"), _("Quit the application"));
+    Connect(wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnQuit));
+    menuBar->Append(fileMenu, _("&File"));
+
+    wxMenu* helpMenu = new wxMenu;
+    helpMenu->Append(wxID_ABOUT, _("&About...\tF1"), _("Show info about this application"));
+    Connect(wxID_ABOUT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnAbout));
+    menuBar->Append(helpMenu, _("&Help"));
+
     SetMenuBar(menuBar);
-
-    CreateStatusBar(2);
-    SetStatusText(_("Hello user"), 0);
-    SetStatusText(GetBuildInfo(), 1);
 }
 
-MainFrame::~MainFrame() {
+ViewWindow *MainFrame::GetViewWindow() {
+    return viewWindow;
 }
 
-void MainFrame::OnClose(wxCloseEvent &event) {
-    Destroy();
+ControlPanel *MainFrame::GetControlPanel() {
+    return controlPanel;
 }
 
 void MainFrame::OnQuit(wxCommandEvent &event) {
-    Destroy();
+    Close(true);
 }
 
 void MainFrame::OnAbout(wxCommandEvent &event) {
@@ -82,45 +60,3 @@ void MainFrame::OnAbout(wxCommandEvent &event) {
         message,
         _("Welcome to..."));
 }
-
-void MainFrame::OnButtonStart(wxCommandEvent &event) {
-}
-
-void MainFrame::OnButtonReset(wxCommandEvent &event) {
-}
-
-// helper functions
-wxMenuBar* BuildMenuBar() {
-    wxMenu* fileMenu = new wxMenu(_T(""));
-    fileMenu->Append(wxID_EXIT, _("&Quit\tAlt-F4"), _("Quit the application"));
-
-    wxMenu* helpMenu = new wxMenu(_T(""));
-    helpMenu->Append(wxID_ABOUT, _("&About...\tF1"), _("Show info about this application"));
-
-    wxMenuBar* menuBar = new wxMenuBar();
-    menuBar->Append(fileMenu, _("&File"));
-    menuBar->Append(helpMenu, _("&Help"));
-
-    return menuBar;
-}
-
-wxString GetBuildInfo() {
-    wxString wxbuild(wxVERSION_STRING);
-
-#if defined(__WXMSW__)
-        wxbuild << _T("-Windows");
-#elif defined(__WXMAC__)
-        wxbuild << _T("-Mac");
-#elif defined(__UNIX__)
-        wxbuild << _T("-Linux");
-#endif
-
-#if wxUSE_UNICODE
-        wxbuild << _T("-Unicode build");
-#else
-        wxbuild << _T("-ANSI build");
-#endif
-
-    return wxbuild;
-}
-// END helper functions
