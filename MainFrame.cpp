@@ -18,6 +18,9 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 
     mainPanel->SetSizer(mainBox);
 
+    renderTimer = new RenderTimer(viewWindow);
+    renderTimer->start();
+
     Centre();
 }
 

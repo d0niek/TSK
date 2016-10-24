@@ -27,7 +27,8 @@ class ViewWindow : public wxGLCanvas
         void SetRotateSpeed(float rotateSpeed);
 
         // events
-        void OnIdle(wxIdleEvent &event);
+        // void OnIdle(wxIdleEvent &event);
+        void OnIdle(wxPaintEvent &event);
         void OnMouseMoved(wxMouseEvent& event);
         void OnMouseDown(wxMouseEvent& event);
         void OnMouseWheelMoved(wxMouseEvent& event);

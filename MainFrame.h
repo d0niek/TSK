@@ -4,12 +4,14 @@
 #include <wx/wx.h>
 
 #include "./MainApp.h"
+#include "./src/RenderTimer.h"
 #include "./src/ViewWindow.h"
 #include "./src/ControlPanel.h"
 
 class MainFrame : public wxFrame
 {
     private:
+        RenderTimer *renderTimer;
         ViewWindow *viewWindow;
         ControlPanel *controlPanel;
 

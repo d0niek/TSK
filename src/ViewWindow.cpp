@@ -6,7 +6,8 @@
 #include "../MainFrame.h"
 
 BEGIN_EVENT_TABLE(ViewWindow, wxGLCanvas)
-    EVT_IDLE(ViewWindow::OnIdle)
+    EVT_PAINT(ViewWindow::OnIdle)
+    // EVT_IDLE(ViewWindow::OnIdle)
     EVT_SIZE(ViewWindow::Resized)
     EVT_MOTION(ViewWindow::OnMouseMoved)
     EVT_LEFT_DOWN(ViewWindow::OnMouseDown)
@@ -67,7 +68,7 @@ void ViewWindow::Render() {
     }
 
     wxGLCanvas::SetCurrent(*glContext);
-    wxClientDC(this);  // only to be used in paint events. use wxClientDC to paint outside the paint event
+    wxPaintDC(this);  // wxPaintDC only to be used in paint events. use wxClientDC to paint outside the paint event
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -175,10 +176,11 @@ void ViewWindow::SetRotateSpeed(float rotateSpeed) {
     this->rotateSpeed = rotateSpeed;
 }
 
-void ViewWindow::OnIdle(wxIdleEvent &event) {
+// void ViewWindow::OnIdle(wxIdleEvent &event) {
+void ViewWindow::OnIdle(wxPaintEvent &event) {
     Update();
     Render();
-    event.RequestMore();
+    // event.RequestMore();
 }
 
 void ViewWindow::OnMouseMoved(wxMouseEvent& event) {}
