@@ -1,3 +1,6 @@
+/**
+ * Copyright 2016 Damian Glinkowski <damianglinkowski@gmail.com>
+ */
 
 #include "./ControlPanel.h"
 #include "../MainFrame.h"

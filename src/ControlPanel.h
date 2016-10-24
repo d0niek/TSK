@@ -1,3 +1,7 @@
+/**
+ * Copyright 2016 Damian Glinkowski <damianglinkowski@gmail.com>
+ */
+
 #ifndef CONTROLPANEL_H
 #define CONTROLPANEL_H
 

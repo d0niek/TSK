@@ -1,3 +1,7 @@
+/**
+ * Copyright 2016 Damian Glinkowski <damianglinkowski@gmail.com>
+ */
+
 #ifndef MAINFRAME_H
 #define MAINFRAME_H
 

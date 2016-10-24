@@ -1,3 +1,7 @@
+/**
+ * Copyright 2016 Damian Glinkowski <damianglinkowski@gmail.com>
+ */
+
 #ifndef VIEWWINDOW_H
 #define VIEWWINDOW_H
 

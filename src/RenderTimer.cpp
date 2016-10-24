@@ -1,3 +1,6 @@
+/**
+ * Copyright 2016 Damian Glinkowski <damianglinkowski@gmail.com>
+ */
 
 #include "./RenderTimer.h"
 
