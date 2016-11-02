@@ -1,0 +1,40 @@
+cmake_minimum_required(VERSION 3.6)
+project(modelowanie)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
+    -std=c++11 \
+    -D_FILE_OFFSET_BITS=64 \
+    -DwxDEBUG_LEVEL=0 \
+    -DWXUSINGDLL \
+    -D__WXGTK__ \
+    -pthread \
+    -L/usr/lib64 \
+    -lwx_gtk2u_xrc-3.0 \
+    -lwx_gtk2u_webview-3.0 \
+    -lwx_gtk2u_html-3.0 \
+    -lwx_gtk2u_qa-3.0 \
+    -lwx_gtk2u_adv-3.0 \
+    -lwx_gtk2u_core-3.0 \
+    -lwx_baseu_xml-3.0 \
+    -lwx_baseu_net-3.0 \
+    -lwx_baseu-3.0 \
+    -lwx_gtk2u_gl-3.0 \
+    -lGL \
+    -lGLU")
+
+set(SOURCE_FILES
+    src/ControlPanel.cpp
+    src/ControlPanel.h
+    src/RenderTimer.cpp
+    src/RenderTimer.h
+    src/ViewWindow.cpp
+    src/ViewWindow.h
+    MainApp.cpp
+    MainApp.h
+    MainFrame.cpp
+    MainFrame.h)
+
+include_directories("/usr/lib64/wx/include/gtk2-unicode-3.0")
+include_directories("/usr/include/wx-3.0")
+
+add_executable(modelowanie ${SOURCE_FILES})
