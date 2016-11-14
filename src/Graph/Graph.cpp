@@ -4,87 +4,71 @@
 #define SIZE(x) (int) x.size()
 #define PB(x) push_back(x)
 
-Graph::Graph(unsigned long n = 0) : g(n)
-{
+template<class V, class E>
+Graph<V, E>::Graph(unsigned int n)
+    : vertices(n) {
 }
 
 template<class V, class E>
-void Graph::edgeD(int b, int e, E d = E())
-{
-    g[b].PB(Edge<E>(d, e));
+void Graph<V, E>::edgeDirected(unsigned int from, unsigned int to, E edge) {
+    vertices[from].PB(Ed(edge, to));
 }
 
 template<class V, class E>
-void Graph::edgeU(int b, int e, E d = E())
-{
-    g[b].PB(Edge<E>(d, e));
-    g[e].PB(Edge<E>(d, b));
+void Graph<V, E>::edgeUndirected(unsigned int vertex_1, unsigned int vertex_2, E edge) {
+    Ed ed(edge, vertex_2);
+
+    ed.rev = SIZE(vertices[vertex_2]) + (vertex_1 == vertex_2);
+    vertices[vertex_1].PB(ed);
+
+    ed.rev = SIZE(vertices[ed.v = vertex_1]) - 1;
+    vertices[vertex_2].PB(ed);
 }
 
-void Graph::bfs(int s)
-{
-    for (auto it = g.begin(); it != g.end(); it++) {
-        it->setT(-1);
-        it->setS(-1);
-    }
+template<class V, class E>
+void Graph<V, E>::bfs(int source) {
+    resetVerticesForBfs(source);
 
-    g[s].setT(0);
+    int queue[SIZE(vertices)];
+    int b = 0;
+    int e = 0;
 
-    int qu[SIZE(g)], b = 0, e = 0;
-
-    qu[0] = s;
+    queue[0] = source;
 
     while (b <= e) {
-        s = qu[b++];
+        source = queue[b++];
 
-        for (auto it = g[s].begin(); it != g[s].end(); it++) {
-            if (g[it->getV()].getT() == -1) {
-                qu[++e] = it->getV();
-                g[it->getV()].setT(g[s].getT() + 1);
-                g[it->getV()].setS(s);
+        for (auto it =vertices[source].begin(); it != vertices[source].end(); it++) {
+            if (vertices[it->getVertex()].getT() == -1) {
+                queue[++e] = it->getVertex();
+                vertices[it->getVertex()].setT(vertices[source].getT() + 1);
+                vertices[it->getVertex()].setS(source);
             }
         }
     }
 }
 
-void Graph::dfs(int e = -1)
-{
-    this->t = -1;
-
-    int b = 0;
-
-    e == -1 ? e = SIZE(this->g) - 1 : b = e;
-
-    for (int x = 0; x < SIZE(this->g); x++) {
-        this->g[x].setD(-1);
-        this->g[x].setF(-1);
-        this->g[x].setS(-1);
+template<class V, class E>
+void Graph<V, E>::resetVerticesForBfs(int source) {
+    for (auto it =vertices.begin(); it != vertices.end(); it++) {
+        it->setT(-1);
+        it->setS(-1);
     }
 
-    for (int x = b; x <= e; x++) {
-        if (this->g[x].getS() == -1) {
-            this->dfsR(x);
-        }
-    }
-}
-
-void Graph::dfsR(int v)
-{
-    g[v].setD(++this->t);
-
-    for (auto it = g[v].begin(); it != g[v].end(); it++) {
-        if (g[it->getV()].getS() == -1) {
-            g[it->getV()].setS(v);
-
-            this->dfsR(it->getV());
-        }
-    }
-
-    g[v].setF(++this->t);
+    vertices[source].setT(0);
 }
 
 template<class V, class E>
-std::vector<Vertex<V, E> > Graph::getG()
-{
-    return this->g;
+std::vector<typename Graph<V, E>::Ve> Graph<V, E>::getVertices() {
+    return vertices;
+}
+
+template<class V, class E>
+Graph<V, E>::Ed::Ed(E e, int v)
+    : E(e), vertex(vertex) {
+}
+
+template<class V, class E>
+int Graph<V, E>::Ed::getVertex() {
+    return this->vertex;
 }

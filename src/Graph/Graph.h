@@ -6,8 +6,6 @@
 #define GRAPTH_H
 
 #include <vector>
-#include "./Vertex.h"
-#include "./Edge.h"
 
 /**
  * Szablon klasy Graph
@@ -18,74 +16,43 @@
 template<class V, class E>
 class Graph
 {
-    private:
-        std::vector<Vertex<V, E> > g;
+    public:
+        class Ed : public E
+        {
+            private:
+                int vertex;
 
-        /**
-         * Pamiętania aktualnego czasu przetwarzania przy dfs
-         *
-         * @var int t
-         */
-        int t;
+            public:
+                Ed(E e, int v);
 
-        /**
-         *
-         * @param v
-         */
-        void dfsR(int v);
+                int getVertex();
+        };
+
+        class Ve : public V, public std::vector<Ed>
+        {
+        };
+
+    protected:
+        std::vector<Ve> vertices;
+
+        void resetVerticesForBfs(int source);
 
     public:
-        Graph(unsigned long n = 0);
+        Graph(unsigned int vertices = 0);
 
-        /**
-         * Dodawanie krawędzi skierowanej
-         *
-         * @param b
-         * @param e
-         * @param d
-         */
-        void edgeD(int b, int e, E d = E());
-
-        /**
-         * Dodawanie krawędzi nieskierowanej
-         *
-         * @param b
-         * @param e
-         * @param d
-         */
-        void edgeU(int b, int e, E d = E());
+        void edgeDirected(unsigned int from, unsigned int to, E edge = E());
+        void edgeUndirected(unsigned int vertex_1, unsigned int vertex_2, E edge = E());
 
         /**
          * Przeszukiwanie grafu wszerz.
          *
-         * Wierzchołek musi zawierać dodatkowe informacje:\n
-         * int t - odległość wierzchołka od źródła wyszukiwania\n
+         * Wierzchołek musi zawierać dodatkowe informacje:
+         * int t - odległość wierzchołka od źródła wyszukiwania
          * int s - nr wierzchołka, z którego prowadzi znaleziona, najkrótsza trasa
-         *
-         * @param s
          */
-        void bfs(int s);
+        void bfs(int source);
 
-        /**
-         * Przeszukiwanie grafu w głąb
-         *
-         * Wierzchołek musi zawierać dodatkowe informacje:\n
-         * int d - czas wejścia do wierzchołka\n
-         * int f - czas wyjścia z wierzchołka\n
-         * int s - nr wierzchołka, z którego prowadzi znaleziona, najkrótsza trasa
-         *
-         * @param e
-         */
-        void dfs(int e = -1);
-
-        //region Getters & Setters
-
-        /**
-         * @return std::vector<Vertex<V, E>>
-         */
-        std::vector<Vertex<V, E> > getG();
-
-        //endregion
+        std::vector<Ve> getVertices();
 };
 
 #endif // GRAPTH_H
