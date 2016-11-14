@@ -17,7 +17,7 @@ for file in ${cpp_files}; do
 
     echo "Compile file: $dir_name/$file_name.cpp"
 
-    g++ ${wx_flags} -Wall -g -c ${file} -o obj/${dir_name}/${file_name}.o
+    g++ ${wx_flags} -std=c++11 -Wall -g -c ${file} -o obj/${dir_name}/${file_name}.o
 done
 
 o_files=$(find obj/ -type f -name "*.o")

@@ -32,7 +32,9 @@ set(SOURCE_FILES
     MainApp.cpp
     MainApp.h
     MainFrame.cpp
-    MainFrame.h)
+    MainFrame.h
+    src/Graph/Graph.h
+    src/Graph/Graph.cpp)
 
 include_directories("/usr/lib64/wx/include/gtk2-unicode-3.0")
 include_directories("/usr/include/wx-3.0")
