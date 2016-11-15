@@ -34,14 +34,6 @@ class ViewWindow : public wxGLCanvas {
 
         // events
         void OnIdle(wxPaintEvent &event);
-        void OnMouseMoved(wxMouseEvent &event);
-        void OnMouseDown(wxMouseEvent &event);
-        void OnMouseWheelMoved(wxMouseEvent &event);
-        void OnMouseReleased(wxMouseEvent &event);
-        void OnRightClick(wxMouseEvent &event);
-        void OnMouseLeftWindow(wxMouseEvent &event);
-        void OnKeyPressed(wxKeyEvent &event);
-        void OnKeyReleased(wxKeyEvent &event);
 
     DECLARE_EVENT_TABLE()
 };

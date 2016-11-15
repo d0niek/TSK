@@ -10,14 +10,6 @@
 BEGIN_EVENT_TABLE(ViewWindow, wxGLCanvas)
         EVT_PAINT(ViewWindow::OnIdle)
         EVT_SIZE(ViewWindow::Resized)
-        EVT_MOTION(ViewWindow::OnMouseMoved)
-        EVT_LEFT_DOWN(ViewWindow::OnMouseDown)
-        EVT_LEFT_UP(ViewWindow::OnMouseReleased)
-        EVT_RIGHT_DOWN(ViewWindow::OnRightClick)
-        EVT_LEAVE_WINDOW(ViewWindow::OnMouseLeftWindow)
-        EVT_KEY_DOWN(ViewWindow::OnKeyPressed)
-        EVT_KEY_UP(ViewWindow::OnKeyReleased)
-        EVT_MOUSEWHEEL(ViewWindow::OnMouseWheelMoved)
 END_EVENT_TABLE()
 
 ViewWindow::ViewWindow(wxPanel *parent, int *args)
@@ -116,28 +108,4 @@ void ViewWindow::SetRotateSpeed(float rotateSpeed) {
 void ViewWindow::OnIdle(wxPaintEvent &event) {
     Update();
     Render();
-}
-
-void ViewWindow::OnMouseMoved(wxMouseEvent &event) {
-}
-
-void ViewWindow::OnMouseDown(wxMouseEvent &event) {
-}
-
-void ViewWindow::OnMouseWheelMoved(wxMouseEvent &event) {
-}
-
-void ViewWindow::OnMouseReleased(wxMouseEvent &event) {
-}
-
-void ViewWindow::OnRightClick(wxMouseEvent &event) {
-}
-
-void ViewWindow::OnMouseLeftWindow(wxMouseEvent &event) {
-}
-
-void ViewWindow::OnKeyPressed(wxKeyEvent &event) {
-}
-
-void ViewWindow::OnKeyReleased(wxKeyEvent &event) {
 }
