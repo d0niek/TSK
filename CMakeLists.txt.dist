@@ -23,18 +23,29 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
     -lGLU")
 
 set(SOURCE_FILES
+    MainApp.cpp
+    MainApp.h
+    MainFrame.cpp
+    MainFrame.h
     src/ControlPanel.cpp
     src/ControlPanel.h
     src/RenderTimer.cpp
     src/RenderTimer.h
     src/ViewWindow.cpp
     src/ViewWindow.h
-    MainApp.cpp
-    MainApp.h
-    MainFrame.cpp
-    MainFrame.h
     src/Graph/Graph.h
-    src/Graph/Graph.cpp)
+    src/Graph/Graph.cpp
+    src/Forest/ForestGenerator.cpp
+    src/Forest/ForestGenerator.h
+    src/Forest/Cell.cpp
+    src/Forest/Cell.h
+    src/Util/Vector3f.cpp
+    src/Util/Vector3f.h
+    src/Util/Color.cpp
+    src/Util/Color.h
+    src/Util/Vector2f.cpp
+    src/Util/Vector2f.h
+    src/Graph/Empty.h)
 
 include_directories("/usr/lib64/wx/include/gtk2-unicode-3.0")
 include_directories("/usr/include/wx-3.0")

@@ -7,6 +7,8 @@
 
 #include <wx/wx.h>
 #include <wx/glcanvas.h>
+#include "./Forest/Cell.h"
+#include "./Forest/ForestGenerator.h"
 
 class ViewWindow : public wxGLCanvas
 {
@@ -15,6 +17,8 @@ class ViewWindow : public wxGLCanvas
         wxGLContext *glContext;
         float angle;
         float rotateSpeed;
+        ForestGenerator *forestGenerator;
+        std::vector<Cell> forest;
 
     public:
         ViewWindow(wxPanel *parent, int* args);
@@ -23,7 +27,6 @@ class ViewWindow : public wxGLCanvas
         void Resized(wxSizeEvent& evt);
         void Update();
         void Render();
-        void Prepare3DViewport(int topleft_x, int topleft_y, int bottomrigth_x, int bottomrigth_y);
         void Prepare2DViewport(int topleft_x, int topleft_y, int bottomrigth_x, int bottomrigth_y);
         bool IsStart();
         int GetWidth();
@@ -31,7 +34,6 @@ class ViewWindow : public wxGLCanvas
         void SetRotateSpeed(float rotateSpeed);
 
         // events
-        // void OnIdle(wxIdleEvent &event);
         void OnIdle(wxPaintEvent &event);
         void OnMouseMoved(wxMouseEvent& event);
         void OnMouseDown(wxMouseEvent& event);
