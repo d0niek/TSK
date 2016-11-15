@@ -10,6 +10,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src/RenderTimer.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ViewWindow.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/RenderTimer.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Util/Color.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Util/Color.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Util/Vector3f.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Util/Vector2f.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Util/Vector2f.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Util/Vector3f.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ControlPanel.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ControlPanel.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MainApp.cpp" isTestSource="false" />
