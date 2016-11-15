@@ -42,7 +42,7 @@ wxBoxSizer *ControlPanel::BuildControlButtons() {
 wxBoxSizer *ControlPanel::BuildWindDirectionSelect() {
     wxBoxSizer *windSelectBox = new wxBoxSizer(wxHORIZONTAL);
 
-    wxStaticText *windDirectionsLabel =  new wxStaticText(this, wxID_ANY, wxT("Wind direction:"));
+    wxStaticText *windDirectionsLabel = new wxStaticText(this, wxID_ANY, wxT("Wind direction:"));
     windSelectBox->Add(windDirectionsLabel, 0, wxALL, 10);
 
     wxArrayString windDirections;
@@ -55,7 +55,7 @@ wxBoxSizer *ControlPanel::BuildWindDirectionSelect() {
     windDirections.Add(wxT("W"));
     windDirections.Add(wxT("NW"));
 
-    wxChoice* windChoice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, windDirections);
+    wxChoice *windChoice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, windDirections);
     windChoice->SetSelection(0);
     windSelectBox->Add(windChoice, 0, wxTOP | wxRIGHT | wxLEFT | wxALIGN_RIGHT, 10);
 
@@ -65,7 +65,7 @@ wxBoxSizer *ControlPanel::BuildWindDirectionSelect() {
 wxBoxSizer *ControlPanel::BuildWindSpeedSlider() {
     wxBoxSizer *windSpeedBox = new wxBoxSizer(wxVERTICAL);
 
-    wxStaticText *windSpeedLabel =  new wxStaticText(this, wxID_ANY, wxT("Wind speed"));
+    wxStaticText *windSpeedLabel = new wxStaticText(this, wxID_ANY, wxT("Wind speed"));
     windSpeedBox->Add(windSpeedLabel, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 10);
 
     windSpeedSlider = new wxSlider(

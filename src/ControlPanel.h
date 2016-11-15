@@ -7,12 +7,11 @@
 
 #include <wx/wx.h>
 
-class ControlPanel : public wxPanel
-{
+class ControlPanel : public wxPanel {
     private:
         wxPanel *parent;
         bool start;
-        wxSlider* windSpeedSlider;
+        wxSlider *windSpeedSlider;
 
         wxBoxSizer *BuildControlButtons();
         wxBoxSizer *BuildWindDirectionSelect();

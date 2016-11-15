@@ -12,8 +12,7 @@
 #include "./src/ViewWindow.h"
 #include "./src/ControlPanel.h"
 
-class MainFrame : public wxFrame
-{
+class MainFrame : public wxFrame {
     private:
         RenderTimer *renderTimer;
         ViewWindow *viewWindow;
@@ -22,7 +21,7 @@ class MainFrame : public wxFrame
         void BuildMenuBar();
 
     public:
-        MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
+        MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
 
         ViewWindow *GetViewWindow();
         ControlPanel *GetControlPanel();

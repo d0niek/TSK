@@ -4,7 +4,7 @@
 
 #include "./MainFrame.h"
 
-MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
+MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     : wxFrame(NULL, wxID_ANY, title, pos, size) {
 
     BuildMenuBar();
@@ -12,7 +12,13 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     wxPanel *mainPanel = new wxPanel(this, -1);
     wxBoxSizer *mainBox = new wxBoxSizer(wxHORIZONTAL);
 
-    int args[] = { WX_GL_RGBA, WX_GL_DOUBLEBUFFER, WX_GL_DEPTH_SIZE, 16, 0 };
+    int args[] = {
+        WX_GL_RGBA,
+        WX_GL_DOUBLEBUFFER,
+        WX_GL_DEPTH_SIZE,
+        16,
+        0
+    };
     viewWindow = new ViewWindow(mainPanel, args);
     mainBox->Add(viewWindow, 1, wxEXPAND);
 
@@ -28,14 +34,14 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 }
 
 void MainFrame::BuildMenuBar() {
-    wxMenuBar* menuBar = new wxMenuBar();
+    wxMenuBar *menuBar = new wxMenuBar();
 
-    wxMenu* fileMenu = new wxMenu;
+    wxMenu *fileMenu = new wxMenu;
     fileMenu->Append(wxID_EXIT, _("&Quit\tAlt-F4"), _("Quit the application"));
     Connect(wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnQuit));
     menuBar->Append(fileMenu, _("&File"));
 
-    wxMenu* helpMenu = new wxMenu;
+    wxMenu *helpMenu = new wxMenu;
     helpMenu->Append(wxID_ABOUT, _("&About...\tF1"), _("Show info about this application"));
     Connect(wxID_ABOUT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrame::OnAbout));
     menuBar->Append(helpMenu, _("&Help"));
@@ -64,5 +70,6 @@ void MainFrame::OnAbout(wxCommandEvent &event) {
 
     wxMessageBox(
         message,
-        _("Welcome to..."));
+        _("Welcome to...")
+    );
 }

@@ -10,8 +10,7 @@
 #include "./Forest/Cell.h"
 #include "./Forest/ForestGenerator.h"
 
-class ViewWindow : public wxGLCanvas
-{
+class ViewWindow : public wxGLCanvas {
     private:
         wxPanel *parent;
         wxGLContext *glContext;
@@ -21,10 +20,10 @@ class ViewWindow : public wxGLCanvas
         std::vector<Cell> forest;
 
     public:
-        ViewWindow(wxPanel *parent, int* args);
+        ViewWindow(wxPanel *parent, int *args);
         virtual ~ViewWindow();
 
-        void Resized(wxSizeEvent& evt);
+        void Resized(wxSizeEvent &evt);
         void Update();
         void Render();
         void Prepare2DViewport(int topleft_x, int topleft_y, int bottomrigth_x, int bottomrigth_y);
@@ -35,16 +34,16 @@ class ViewWindow : public wxGLCanvas
 
         // events
         void OnIdle(wxPaintEvent &event);
-        void OnMouseMoved(wxMouseEvent& event);
-        void OnMouseDown(wxMouseEvent& event);
-        void OnMouseWheelMoved(wxMouseEvent& event);
-        void OnMouseReleased(wxMouseEvent& event);
-        void OnRightClick(wxMouseEvent& event);
-        void OnMouseLeftWindow(wxMouseEvent& event);
-        void OnKeyPressed(wxKeyEvent& event);
-        void OnKeyReleased(wxKeyEvent& event);
+        void OnMouseMoved(wxMouseEvent &event);
+        void OnMouseDown(wxMouseEvent &event);
+        void OnMouseWheelMoved(wxMouseEvent &event);
+        void OnMouseReleased(wxMouseEvent &event);
+        void OnRightClick(wxMouseEvent &event);
+        void OnMouseLeftWindow(wxMouseEvent &event);
+        void OnKeyPressed(wxKeyEvent &event);
+        void OnKeyReleased(wxKeyEvent &event);
 
-        DECLARE_EVENT_TABLE()
+    DECLARE_EVENT_TABLE()
 };
 
 #endif // VIEWWINDOW_H

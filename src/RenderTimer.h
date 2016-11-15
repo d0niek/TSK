@@ -8,8 +8,7 @@
 #include <wx/timer.h>
 #include "./ViewWindow.h"
 
-class RenderTimer : public wxTimer
-{
+class RenderTimer : public wxTimer {
     private:
         ViewWindow *viewWindow;
 
