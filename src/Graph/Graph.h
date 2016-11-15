@@ -14,11 +14,9 @@
  * @param E Klasa z dodatkowymi informacjami o krawędzi, po której dziedziczy Edge
  */
 template<class V, class E>
-class Graph
-{
+class Graph {
     public:
-        class Ed : public E
-        {
+        class Ed : public E {
             private:
                 int vertex;
 
@@ -26,10 +24,11 @@ class Graph
                 Ed(E e, int v);
 
                 int getVertex();
+
+                void setVertex(int vertex);
         };
 
-        class Ve : public V, public std::vector<Ed>
-        {
+        class Ve : public V, public std::vector<Ed> {
         };
 
     protected:
@@ -38,10 +37,10 @@ class Graph
         void resetVerticesForBfs(int source);
 
     public:
-        Graph(unsigned int vertices = 0);
+        Graph(int vertices = 0);
 
-        void edgeDirected(unsigned int from, unsigned int to, E edge = E());
-        void edgeUndirected(unsigned int vertex_1, unsigned int vertex_2, E edge = E());
+        void edgeDirected(int from, int to, E edge = E());
+        void edgeUndirected(int vertex_1, int vertex_2, E edge = E());
 
         /**
          * Przeszukiwanie grafu wszerz.

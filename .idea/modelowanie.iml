@@ -4,8 +4,9 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/MainApp.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Graph/Graph.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Graph/Empty.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Graph/Graph.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Graph/Graph.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ViewWindow.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/RenderTimer.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ViewWindow.h" isTestSource="false" />
