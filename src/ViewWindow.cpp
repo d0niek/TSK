@@ -32,7 +32,7 @@ ViewWindow::ViewWindow(wxPanel *parent, int *args)
     // To avoid flashing on MSW
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 
-    forestGenerator = new ForestGenerator(20, 20);
+    forestGenerator = new ForestGenerator(60, 90);
 }
 
 ViewWindow::~ViewWindow() {
