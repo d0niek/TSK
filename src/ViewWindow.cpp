@@ -1,10 +1,14 @@
 /**
  * Copyright 2016 Damian Glinkowski <damianglinkowski@gmail.com>
  */
+#include <Windows.h>
+#include <GL/glew.h>
+#include <GL/glu.h>
+#include <GL/gl.h>
+#include <GL/glut.h>
+#include <wx/glcanvas.h>
 
 #include "./ViewWindow.h"
-
-#include <GL/glu.h>
 #include "../MainFrame.h"
 
 #define CELLS_PER_ROW 60
