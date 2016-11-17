@@ -5,10 +5,8 @@
 #ifndef EMPTY_H
 #define EMPTY_H
 
-class Empty
+struct Empty
 {
-    public:
-        int rev;
 };
 
 #endif //EMPTY_H

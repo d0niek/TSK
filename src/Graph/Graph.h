@@ -6,6 +6,8 @@
 #define GRAPTH_H
 
 #include <vector>
+#include "../Util/Vector2f.h"
+#include "../Util/Color.h"
 
 /**
  * Szablon klasy Graph
@@ -14,44 +16,37 @@
  * @param E Klasa z dodatkowymi informacjami o krawędzi, po której dziedziczy Edge
  */
 template<class V, class E>
-class Graph {
-    public:
-        class Ed : public E {
-            private:
-                int vertex;
+struct Graph {
+    struct Edge : public E {
+        int vertex;
+        int rev;
 
-            public:
-                Ed(E e, int v);
+        Edge(E e, int v);
+    };
 
-                int getVertex();
+    struct Vertex : public V, public std::vector<Edge> {
+        int t;
+        int s;
+    };
 
-                void setVertex(int vertex);
-        };
+    std::vector<Vertex> vertices;
 
-        class Ve : public V, public std::vector<Ed> {
-        };
+    Graph(int vertices = 0);
 
-    protected:
-        std::vector<Ve> vertices;
+    void edgeDirected(int from, int to, E edge = E());
+    void edgeUndirected(int vertex_1, int vertex_2, E edge = E());
 
+    /**
+     * Przeszukiwanie grafu wszerz.
+     *
+     * Wierzchołek musi zawierać dodatkowe informacje:
+     * int t - odległość wierzchołka od źródła wyszukiwania
+     * int s - nr wierzchołka, z którego prowadzi znaleziona, najkrótsza trasa
+     */
+    void bfs(int source);
+
+    private:
         void resetVerticesForBfs(int source);
-
-    public:
-        Graph(int vertices = 0);
-
-        void edgeDirected(int from, int to, E edge = E());
-        void edgeUndirected(int vertex_1, int vertex_2, E edge = E());
-
-        /**
-         * Przeszukiwanie grafu wszerz.
-         *
-         * Wierzchołek musi zawierać dodatkowe informacje:
-         * int t - odległość wierzchołka od źródła wyszukiwania
-         * int s - nr wierzchołka, z którego prowadzi znaleziona, najkrótsza trasa
-         */
-        void bfs(int source);
-
-        std::vector<Ve> getVertices();
 };
 
 #endif // GRAPTH_H

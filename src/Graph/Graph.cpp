@@ -1,3 +1,6 @@
+/**
+ * Copyright 2016 Damian Glinkowski <damianglinkowski@gmail.com>
+ */
 
 #include "./Graph.h"
 #include "./Empty.h"
@@ -7,24 +10,29 @@
 #define PB(x) push_back(x)
 
 template<class V, class E>
+Graph<V, E>::Edge::Edge(E e, int v)
+    : E(e), vertex(vertex) {
+}
+
+template<class V, class E>
 Graph<V, E>::Graph(int n)
     : vertices(n) {
 }
 
 template<class V, class E>
 void Graph<V, E>::edgeDirected(int from, int to, E edge) {
-    vertices[from].PB(Ed(edge, to));
+    vertices[from].PB(Edge(edge, to));
 }
 
 template<class V, class E>
 void Graph<V, E>::edgeUndirected(int vertex_1, int vertex_2, E edge) {
-    Ed ed(edge, vertex_2);
+    Edge ed(edge, vertex_2);
 
     ed.rev = SIZE(vertices[vertex_2]) + (vertex_1 == vertex_2);
     vertices[vertex_1].PB(ed);
 
-    ed.setVertex(vertex_1);
-    ed.rev = SIZE(vertices[ed.getVertex()]) - 1;
+    ed.vertex = vertex_1;
+    ed.rev = SIZE(vertices[ed.vertex]) - 1;
     vertices[vertex_2].PB(ed);
 }
 
@@ -42,10 +50,10 @@ void Graph<V, E>::bfs(int source) {
         source = queue[b++];
 
         for (auto it = vertices[source].begin(); it != vertices[source].end(); it++) {
-            if (vertices[it->getVertex()].getT() == -1) {
-                queue[++e] = it->getVertex();
-                vertices[it->getVertex()].setT(vertices[source].getT() + 1);
-                vertices[it->getVertex()].setS(source);
+            if (vertices[it->vertex].t == -1) {
+                queue[++e] = it->vertex;
+                vertices[it->vertex].t = vertices[source].t + 1;
+                vertices[it->vertex].s = source;
             }
         }
     }
@@ -54,31 +62,11 @@ void Graph<V, E>::bfs(int source) {
 template<class V, class E>
 void Graph<V, E>::resetVerticesForBfs(int source) {
     for (auto it = vertices.begin(); it != vertices.end(); it++) {
-        it->setT(-1);
-        it->setS(-1);
+        it->t = -1;
+        it->s = -1;
     }
 
-    vertices[source].setT(0);
-}
-
-template<class V, class E>
-std::vector<typename Graph<V, E>::Ve> Graph<V, E>::getVertices() {
-    return vertices;
-}
-
-template<class V, class E>
-Graph<V, E>::Ed::Ed(E e, int v)
-    : E(e), vertex(vertex) {
-}
-
-template<class V, class E>
-int Graph<V, E>::Ed::getVertex() {
-    return vertex;
-}
-
-template<class V, class E>
-void Graph<V, E>::Ed::setVertex(int vertex) {
-    this->vertex = vertex;
+    vertices[source].t = 0;
 }
 
 template
