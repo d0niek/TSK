@@ -14,8 +14,6 @@ class ViewWindow : public wxGLCanvas {
     private:
         wxPanel *parent;
         wxGLContext *glContext;
-        float angle;
-        float rotateSpeed;
         ForestGenerator *forestGenerator;
         std::vector<Cell> forest;
 
@@ -30,7 +28,6 @@ class ViewWindow : public wxGLCanvas {
         bool IsStart();
         int GetWidth();
         int GetHeight();
-        void SetRotateSpeed(float rotateSpeed);
 
         // events
         void OnIdle(wxPaintEvent &event);

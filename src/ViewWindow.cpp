@@ -18,8 +18,6 @@ ViewWindow::ViewWindow(wxPanel *parent, int *args)
     this->parent = parent;
 
     glContext = new wxGLContext(this);
-    angle = 0.0f;
-    rotateSpeed = 2.0f;
 
     // To avoid flashing on MSW
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
@@ -43,8 +41,6 @@ void ViewWindow::Update() {
     if (!IsStart()) {
         return;
     }
-
-    angle += rotateSpeed;
 }
 
 void ViewWindow::Render() {
@@ -99,10 +95,6 @@ int ViewWindow::GetWidth() {
 
 int ViewWindow::GetHeight() {
     return GetSize().y;
-}
-
-void ViewWindow::SetRotateSpeed(float rotateSpeed) {
-    this->rotateSpeed = rotateSpeed;
 }
 
 void ViewWindow::OnIdle(wxPaintEvent &event) {

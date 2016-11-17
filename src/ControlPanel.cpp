@@ -89,6 +89,4 @@ void ControlPanel::OnReset(wxCommandEvent &event) {
 }
 
 void ControlPanel::OnWindSpeedSlider(wxScrollEvent &event) {
-    MainFrame *mainFrame = reinterpret_cast<MainFrame *>(parent->GetParent());
-    mainFrame->GetViewWindow()->SetRotateSpeed(windSpeedSlider->GetValue());
 }
