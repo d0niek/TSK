@@ -9,13 +9,14 @@
 #include <wx/glcanvas.h>
 #include "./Forest/Cell.h"
 #include "./Forest/ForestGenerator.h"
+#include "./Graph/Graph.h"
 
 class ViewWindow : public wxGLCanvas {
     private:
         wxPanel *parent;
         wxGLContext *glContext;
         ForestGenerator *forestGenerator;
-        std::vector<Cell> forest;
+        Graph<Cell, Empty> forest;
 
     public:
         ViewWindow(wxPanel *parent, int *args);

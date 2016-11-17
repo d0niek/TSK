@@ -14,6 +14,19 @@ Cell::Cell(Vector2f point, float width, float height, Color color)
     : point(point), width(width), height(height), color(color) {
 }
 
+Cell::Cell(const Cell &cell)
+    : point(cell.GetPoint()), width(cell.GetWidth()), height(cell.GetHeight()), color(cell.GetColor()) {
+}
+
+Cell &Cell::operator=(const Cell &cell) {
+    point = cell.GetPoint();
+    width = cell.GetWidth();
+    height = cell.GetHeight();
+    color = cell.GetColor();
+
+    return *this;
+}
+
 void Cell::Render() {
     glColor4f(color.r, color.g, color.b, color.a);
 
@@ -25,59 +38,45 @@ void Cell::Render() {
     glEnd();
 }
 
-Vector2f Cell::getPoint() const {
+Vector2f Cell::GetPoint() const {
     return point;
 }
 
-void Cell::setPoint(const Vector2f &point) {
-    Cell::point = point;
+void Cell::SetPoint(const Vector2f &point) {
+    this->point = point;
 }
 
-float Cell::getWidth() const {
+float Cell::GetWidth() const {
     return width;
 }
 
-void Cell::setWidth(float width) {
-    Cell::width = width;
+void Cell::SetWidth(float width) {
+    this->width = width;
 }
 
-float Cell::getHeight() const {
+float Cell::GetHeight() const {
     return height;
 }
 
-void Cell::setHeight(float height) {
-    Cell::height = height;
+void Cell::SetHeight(float height) {
+    this->height = height;
 }
 
-Color Cell::getColor() const {
+Color Cell::GetColor() const {
     return color;
 }
 
-void Cell::setColor(Color color) {
-    Cell::color = color;
-}
-
-int Cell::getT() {
-    return t;
-}
-
-void Cell::setT(int t) {
-    Cell::t = t;
-}
-
-int Cell::getS() {
-    return s;
-}
-
-void Cell::setS(int s) {
-    Cell::s = s;
+void Cell::SetColor(const Color &color) {
+    this->color = color;
 }
 
 wxString &operator<<(wxString &s, const Cell &cell) {
-    s << "Point " << cell.getPoint() << "\n";
-    s << "Width " << cell.getWidth() << ", " << "Height " << cell.getHeight() << "\n";
+    Color color = cell.GetColor();
+
+    s << "Point " << cell.GetPoint() << "\n";
+    s << "Width " << cell.GetWidth() << ", " << "Height " << cell.GetHeight() << "\n";
     s << "Color (rgba) ";
-    s << cell.getColor().r << ", " << cell.getColor().g << ", " << cell.getColor().b << cell.getColor().a;
+    s << color.r << ", " << color.g << ", " << color.b << color.a;
 
     return s;
 }

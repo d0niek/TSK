@@ -16,31 +16,22 @@ class Cell {
         float height;
         Color color;
 
-        /**
-         * For Graph::bfs()
-         */
-        int t;
-        int s;
-
     public:
         Cell();
         Cell(Vector2f point, float width, float height, Color color);
+        Cell(const Cell &cell);
 
+        Cell &operator=(const Cell &cell);
         void Render();
 
-        Vector2f getPoint() const;
-        void setPoint(const Vector2f &point);
-        float getWidth() const;
-        void setWidth(float width);
-        float getHeight() const;
-        void setHeight(float height);
-        Color getColor() const;
-        void setColor(Color color);
-
-        int getT();
-        void setT(int t);
-        int getS();
-        void setS(int s);
+        Vector2f GetPoint() const;
+        void SetPoint(const Vector2f &color);
+        float GetWidth() const;
+        void SetWidth(float color);
+        float GetHeight() const;
+        void SetHeight(float color);
+        Color GetColor() const;
+        void SetColor(const Color &color);
 };
 
 wxString &operator<<(wxString &s, const Cell &cell);

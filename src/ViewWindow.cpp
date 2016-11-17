@@ -23,6 +23,7 @@ ViewWindow::ViewWindow(wxPanel *parent, int *args)
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 
     forestGenerator = new ForestGenerator(60, 90);
+    forest = forestGenerator->Generate(GetWidth(), GetHeight());
 }
 
 ViewWindow::~ViewWindow() {
@@ -30,9 +31,7 @@ ViewWindow::~ViewWindow() {
 }
 
 void ViewWindow::Resized(wxSizeEvent &evt) {
-    if (IsStart()) {
-        forest = forestGenerator->Generate(GetWidth(), GetHeight());
-    }
+    forestGenerator->ResetCellPointAndSize(forest, GetWidth(), GetHeight());
 
     Refresh();
 }
@@ -56,7 +55,7 @@ void ViewWindow::Render() {
     Prepare2DViewport(0, 0, GetWidth(), GetHeight());
     glLoadIdentity();
 
-    for (auto cellIt = forest.begin(); cellIt != forest.end(); cellIt++) {
+    for (auto cellIt = forest.vertices.begin(); cellIt != forest.vertices.end(); cellIt++) {
         cellIt->Render();
     }
 

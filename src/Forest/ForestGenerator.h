@@ -14,11 +14,21 @@ class ForestGenerator {
     private:
         int cellsPerRow;
         int cellsPerColumn;
+        float cellWidth;
+        float cellHeight;
+
+        void CalculateCellWidthAndHeight(float width, float height);
+
+        Graph<Cell, Empty>::Vertex CreateVertex(int row, int col);
+
+        void AddEdgeToRightNeighbor(Graph<Cell, Empty> &forest, int v1);
+        void AddEdgeToBottomNeighbor(Graph<Cell, Empty> &forest, int v1);
 
     public:
         ForestGenerator(int cellsPerRow, int cellsPerColumn);
 
-        std::vector<Cell> Generate(float width, float height);
+        Graph<Cell, Empty> Generate(float width, float height);
+        void ResetCellPointAndSize(Graph<Cell, Empty> &forest, float width, float height);
 };
 
 #endif //FORESTGENERATOR_H
