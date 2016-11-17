@@ -21,8 +21,8 @@ class ForestGenerator {
 
         Graph<Cell, Empty>::Vertex CreateVertex(int row, int col);
 
-        void AddEdgeToRightNeighbor(Graph<Cell, Empty> &forest, int v1);
-        void AddEdgeToBottomNeighbor(Graph<Cell, Empty> &forest, int v1);
+        void AddUndirectedEdgeToRightNeighbor(Graph<Cell, Empty> &forest, int v1);
+        void AddUndirectedEdgeToBottomNeighbor(Graph<Cell, Empty> &forest, int v1);
 
     public:
         ForestGenerator(int cellsPerRow, int cellsPerColumn);

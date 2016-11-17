@@ -19,8 +19,8 @@ Graph<Cell, Empty> ForestGenerator::Generate(float width, float height) {
 
             forest.vertices[cellIndex] = CreateVertex(i, j);
 
-            AddEdgeToRightNeighbor(forest, cellIndex);
-            AddEdgeToBottomNeighbor(forest, cellIndex);
+            AddUndirectedEdgeToRightNeighbor(forest, cellIndex);
+            AddUndirectedEdgeToBottomNeighbor(forest, cellIndex);
         }
     }
 
@@ -46,20 +46,20 @@ Graph<Cell, Empty>::Vertex ForestGenerator::CreateVertex(int row, int col) {
     return vertex;
 }
 
-void ForestGenerator::AddEdgeToRightNeighbor(Graph<Cell, Empty> &forest, int v1) {
+void ForestGenerator::AddUndirectedEdgeToRightNeighbor(Graph<Cell, Empty> &forest, int v1) {
     int rightNeighbor = v1 + 1;
     int lastNeighborInRow = (v1 / cellsPerColumn) * cellsPerColumn + cellsPerColumn;
 
     if (rightNeighbor < lastNeighborInRow) {
-        forest.edgeDirected(v1, rightNeighbor);
+        forest.edgeUndirected(v1, rightNeighbor);
     }
 }
 
-void ForestGenerator::AddEdgeToBottomNeighbor(Graph<Cell, Empty> &forest, int v1) {
+void ForestGenerator::AddUndirectedEdgeToBottomNeighbor(Graph<Cell, Empty> &forest, int v1) {
     int bottomNeighbor = v1 + cellsPerColumn;
 
     if (bottomNeighbor < cellsPerRow) {
-        forest.edgeDirected(v1, bottomNeighbor);
+        forest.edgeUndirected(v1, bottomNeighbor);
     }
 }
 

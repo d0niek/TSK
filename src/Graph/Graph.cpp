@@ -20,11 +20,6 @@ Graph<V, E>::Graph(int n)
 }
 
 template<class V, class E>
-void Graph<V, E>::edgeDirected(int from, int to, E edge) {
-    vertices[from].PB(Edge(edge, to));
-}
-
-template<class V, class E>
 void Graph<V, E>::edgeUndirected(int vertex_1, int vertex_2, E edge) {
     Edge ed(edge, vertex_2);
 

@@ -33,7 +33,6 @@ struct Graph {
 
     Graph(int vertices = 0);
 
-    void edgeDirected(int from, int to, E edge = E());
     void edgeUndirected(int vertex_1, int vertex_2, E edge = E());
 
     /**
