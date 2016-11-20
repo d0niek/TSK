@@ -22,6 +22,9 @@ ControlPanel::ControlPanel(wxPanel *parent)
     wxBoxSizer *windSpeedBox = BuildWindSpeedSlider();
     menuBox->Add(windSpeedBox, 0, wxEXPAND);
 
+    wxBoxSizer *generateForestButtonBox = BuildGenerateForestButton();
+    menuBox->Add(generateForestButtonBox);
+
     this->SetSizer(menuBox);
 }
 
@@ -76,6 +79,20 @@ wxBoxSizer *ControlPanel::BuildWindSpeedSlider() {
     return windSpeedBox;
 }
 
+wxBoxSizer *ControlPanel::BuildGenerateForestButton() {
+    wxBoxSizer *generateForestButtonBox = new wxBoxSizer(wxHORIZONTAL);
+
+    wxButton *startButton = new wxButton(this, idButtonGenerateForest, wxT("Generate forest"));
+    Connect(
+        idButtonGenerateForest,
+        wxEVT_COMMAND_BUTTON_CLICKED,
+        wxCommandEventHandler(ControlPanel::OnGenerateForest)
+    );
+    generateForestButtonBox->Add(startButton, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 10);
+
+    return generateForestButtonBox;
+}
+
 bool ControlPanel::IsStart() {
     return start;
 }
@@ -89,4 +106,11 @@ void ControlPanel::OnReset(wxCommandEvent &event) {
 }
 
 void ControlPanel::OnWindSpeedSlider(wxScrollEvent &event) {
+}
+
+void ControlPanel::OnGenerateForest(wxCommandEvent &event) {
+    MainFrame *mainFrame = reinterpret_cast<MainFrame *>(parent->GetParent());
+    if (!mainFrame->GetViewWindow()->IsForestGenerated()) {
+        mainFrame->GetViewWindow()->GenerateForest();
+    }
 }

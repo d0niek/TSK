@@ -22,7 +22,8 @@ class ViewWindow : public wxGLCanvas {
         ViewWindow(wxPanel *parent, int *args);
         virtual ~ViewWindow();
 
-        void Resized(wxSizeEvent &evt);
+        void GenerateForest();
+        bool IsForestGenerated();
         void Update();
         void Render();
         void Prepare2DViewport(int topleft_x, int topleft_y, int bottomrigth_x, int bottomrigth_y);
@@ -32,6 +33,7 @@ class ViewWindow : public wxGLCanvas {
 
         // events
         void OnIdle(wxPaintEvent &event);
+        void OnResize(wxSizeEvent &evt);
 
     DECLARE_EVENT_TABLE()
 };

@@ -9,7 +9,7 @@
 
 BEGIN_EVENT_TABLE(ViewWindow, wxGLCanvas)
         EVT_PAINT(ViewWindow::OnIdle)
-        EVT_SIZE(ViewWindow::Resized)
+        EVT_SIZE(ViewWindow::OnResize)
 END_EVENT_TABLE()
 
 ViewWindow::ViewWindow(wxPanel *parent, int *args)
@@ -23,17 +23,19 @@ ViewWindow::ViewWindow(wxPanel *parent, int *args)
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 
     forestGenerator = new ForestGenerator(60, 90);
-    forest = forestGenerator->Generate(GetWidth(), GetHeight());
+    forest = Graph<Cell, Empty>(0);
 }
 
 ViewWindow::~ViewWindow() {
     delete glContext;
 }
 
-void ViewWindow::Resized(wxSizeEvent &evt) {
-    forestGenerator->ResetCellPointAndSize(forest, GetWidth(), GetHeight());
+void ViewWindow::GenerateForest() {
+    forest = forestGenerator->Generate(GetWidth(), GetHeight());
+}
 
-    Refresh();
+bool ViewWindow::IsForestGenerated() {
+    return (bool) forest.vertices.size();
 }
 
 void ViewWindow::Update() {
@@ -99,4 +101,12 @@ int ViewWindow::GetHeight() {
 void ViewWindow::OnIdle(wxPaintEvent &event) {
     Update();
     Render();
+}
+
+void ViewWindow::OnResize(wxSizeEvent &evt) {
+    if (IsForestGenerated()) {
+        forestGenerator->ResetCellPointAndSize(forest, GetWidth(), GetHeight());
+    }
+
+    Refresh();
 }

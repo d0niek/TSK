@@ -68,11 +68,12 @@ void ForestGenerator::ResetCellPointAndSize(Graph<Cell, Empty> &forest, float wi
 
     for (int i = 0; i < cellsPerRow; i++) {
         for (int j = 0; j < cellsPerColumn; j++) {
+            int cellIndex = (i * cellsPerColumn) + j;
             Vector2f point(j * cellWidth + j, i * cellHeight + i);
 
-            forest.vertices[(i * cellsPerColumn) + j].SetPoint(point);
-            forest.vertices[(i * cellsPerColumn) + j].SetWidth(cellWidth);
-            forest.vertices[(i * cellsPerColumn) + j].SetHeight(cellHeight);
+            forest.vertices[cellIndex].SetPoint(point);
+            forest.vertices[cellIndex].SetWidth(cellWidth);
+            forest.vertices[cellIndex].SetHeight(cellHeight);
         }
     }
 }

@@ -16,12 +16,14 @@ class ControlPanel : public wxPanel {
         wxBoxSizer *BuildControlButtons();
         wxBoxSizer *BuildWindDirectionSelect();
         wxBoxSizer *BuildWindSpeedSlider();
+        wxBoxSizer *BuildGenerateForestButton();
 
     public:
         enum {
             idButtonStart = 1000,
             idButtonReset,
-            idSliderWindSpeed
+            idSliderWindSpeed,
+            idButtonGenerateForest
         };
 
         ControlPanel(wxPanel *parent);
@@ -32,6 +34,7 @@ class ControlPanel : public wxPanel {
         void OnStart(wxCommandEvent &event);
         void OnReset(wxCommandEvent &event);
         void OnWindSpeedSlider(wxScrollEvent &event);
+        void OnGenerateForest(wxCommandEvent &event);
 };
 
 #endif // CONTROLPANEL_H
