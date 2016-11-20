@@ -10,7 +10,7 @@
 #define PB(x) push_back(x)
 
 template<class V, class E>
-Graph<V, E>::Edge::Edge(E e, int v)
+Graph<V, E>::Edge::Edge(E e, int vertex)
     : E(e), vertex(vertex) {
 }
 
@@ -44,11 +44,14 @@ void Graph<V, E>::bfs(int source) {
     while (b <= e) {
         source = queue[b++];
 
+        vertices[source].SetColor(Color(255.0f, 0.0f, 0.0f));
+
         for (auto it = vertices[source].begin(); it != vertices[source].end(); it++) {
             if (vertices[it->vertex].t == -1) {
                 queue[++e] = it->vertex;
                 vertices[it->vertex].t = vertices[source].t + 1;
                 vertices[it->vertex].s = source;
+                vertices[it->vertex].SetColor(Color(255.0f, 255.0f, 0.0f));
             }
         }
     }

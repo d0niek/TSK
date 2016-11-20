@@ -7,6 +7,9 @@
 #include <GL/glu.h>
 #include "../MainFrame.h"
 
+#define CELLS_PER_ROW 60
+#define CELLS_PER_COLUMN 90
+
 BEGIN_EVENT_TABLE(ViewWindow, wxGLCanvas)
         EVT_PAINT(ViewWindow::OnIdle)
         EVT_SIZE(ViewWindow::OnResize)
@@ -22,7 +25,7 @@ ViewWindow::ViewWindow(wxPanel *parent, int *args)
     // To avoid flashing on MSW
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 
-    forestGenerator = new ForestGenerator(60, 90);
+    forestGenerator = new ForestGenerator(CELLS_PER_ROW, CELLS_PER_COLUMN);
     forest = Graph<Cell, Empty>(0);
 }
 
@@ -36,6 +39,11 @@ void ViewWindow::GenerateForest() {
 
 bool ViewWindow::IsForestGenerated() {
     return (bool) forest.vertices.size();
+}
+
+void ViewWindow::BurnForest() {
+    int source = (CELLS_PER_ROW / 2 * CELLS_PER_COLUMN) + (CELLS_PER_COLUMN / 2);
+    forest.bfs(source);
 }
 
 void ViewWindow::Update() {

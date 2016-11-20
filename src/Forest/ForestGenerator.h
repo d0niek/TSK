@@ -19,7 +19,7 @@ class ForestGenerator {
 
         void CalculateCellWidthAndHeight(float width, float height);
 
-        Graph<Cell, Empty>::Vertex CreateVertex(int row, int col);
+        void SetCellPointAndSize(Graph<Cell, Empty>::Vertex &vertex, int row, int col);
 
         void AddUndirectedEdgeToRightNeighbor(Graph<Cell, Empty> &forest, int v1);
         void AddUndirectedEdgeToBottomNeighbor(Graph<Cell, Empty> &forest, int v1);

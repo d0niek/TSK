@@ -24,6 +24,7 @@ class ViewWindow : public wxGLCanvas {
 
         void GenerateForest();
         bool IsForestGenerated();
+        void BurnForest();
         void Update();
         void Render();
         void Prepare2DViewport(int topleft_x, int topleft_y, int bottomrigth_x, int bottomrigth_y);

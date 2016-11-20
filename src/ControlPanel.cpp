@@ -25,7 +25,7 @@ ControlPanel::ControlPanel(wxPanel *parent)
     wxBoxSizer *generateForestButtonBox = BuildGenerateForestButton();
     menuBox->Add(generateForestButtonBox);
 
-    this->SetSizer(menuBox);
+    SetSizer(menuBox);
 }
 
 wxBoxSizer *ControlPanel::BuildControlButtons() {
@@ -99,10 +99,20 @@ bool ControlPanel::IsStart() {
 
 void ControlPanel::OnStart(wxCommandEvent &event) {
     start = true;
+
+    MainFrame *mainFrame = reinterpret_cast<MainFrame *>(parent->GetParent());
+    if (mainFrame->GetViewWindow()->IsForestGenerated()) {
+        mainFrame->GetViewWindow()->BurnForest();
+    }
 }
 
 void ControlPanel::OnReset(wxCommandEvent &event) {
     start = false;
+
+    MainFrame *mainFrame = reinterpret_cast<MainFrame *>(parent->GetParent());
+    if (mainFrame->GetViewWindow()->IsForestGenerated()) {
+        mainFrame->GetViewWindow()->GenerateForest();
+    }
 }
 
 void ControlPanel::OnWindSpeedSlider(wxScrollEvent &event) {
@@ -110,7 +120,7 @@ void ControlPanel::OnWindSpeedSlider(wxScrollEvent &event) {
 
 void ControlPanel::OnGenerateForest(wxCommandEvent &event) {
     MainFrame *mainFrame = reinterpret_cast<MainFrame *>(parent->GetParent());
-    if (!mainFrame->GetViewWindow()->IsForestGenerated()) {
+    if (!IsStart()) {
         mainFrame->GetViewWindow()->GenerateForest();
     }
 }

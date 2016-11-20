@@ -17,7 +17,7 @@ Graph<Cell, Empty> ForestGenerator::Generate(float width, float height) {
         for (int j = 0; j < cellsPerColumn; j++) {
             int cellIndex = (i * cellsPerColumn) + j;
 
-            forest.vertices[cellIndex] = CreateVertex(i, j);
+            SetCellPointAndSize(forest.vertices[cellIndex], i, j);
 
             AddUndirectedEdgeToRightNeighbor(forest, cellIndex);
             AddUndirectedEdgeToBottomNeighbor(forest, cellIndex);
@@ -32,9 +32,7 @@ void ForestGenerator::CalculateCellWidthAndHeight(float width, float height) {
     cellHeight = (height - cellsPerRow) / cellsPerRow;
 }
 
-Graph<Cell, Empty>::Vertex ForestGenerator::CreateVertex(int row, int col) {
-    Graph<Cell, Empty>::Vertex vertex = Graph<Cell, Empty>::Vertex();
-
+void ForestGenerator::SetCellPointAndSize(Graph<Cell, Empty>::Vertex &vertex, int row, int col) {
     Vector2f point(col * cellWidth + col, row * cellHeight + row);
     Color color(0.0f, 255.0f, 0.0f, 1.0f);
 
@@ -42,8 +40,6 @@ Graph<Cell, Empty>::Vertex ForestGenerator::CreateVertex(int row, int col) {
     vertex.SetWidth(cellWidth);
     vertex.SetHeight(cellHeight);
     vertex.SetColor(color);
-
-    return vertex;
 }
 
 void ForestGenerator::AddUndirectedEdgeToRightNeighbor(Graph<Cell, Empty> &forest, int v1) {
@@ -58,7 +54,7 @@ void ForestGenerator::AddUndirectedEdgeToRightNeighbor(Graph<Cell, Empty> &fores
 void ForestGenerator::AddUndirectedEdgeToBottomNeighbor(Graph<Cell, Empty> &forest, int v1) {
     int bottomNeighbor = v1 + cellsPerColumn;
 
-    if (bottomNeighbor < cellsPerRow) {
+    if (bottomNeighbor < (cellsPerRow * cellsPerColumn - 1)) {
         forest.edgeUndirected(v1, bottomNeighbor);
     }
 }
