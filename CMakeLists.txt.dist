@@ -45,7 +45,9 @@ set(SOURCE_FILES
     src/Util/Color.h
     src/Util/Vector2f.cpp
     src/Util/Vector2f.h
-    src/Graph/Empty.h)
+    src/Graph/Empty.h
+    src/BurnForestThread.cpp
+    src/BurnForestThread.h)
 
 include_directories("/usr/lib64/wx/include/gtk2-unicode-3.0")
 include_directories("/usr/include/wx-3.0")
