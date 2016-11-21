@@ -5,6 +5,7 @@
 #ifndef CELL_H
 #define CELL_H
 
+#include <Windows.h>
 #include <wx/string.h>
 #include "../Util/Vector2f.h"
 #include "../Util/Color.h"

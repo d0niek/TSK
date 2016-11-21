@@ -60,7 +60,7 @@ wxBoxSizer *ControlPanel::BuildWindDirectionSelect() {
 
     wxChoice *windChoice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, windDirections);
     windChoice->SetSelection(0);
-    windSelectBox->Add(windChoice, 0, wxTOP | wxRIGHT | wxLEFT | wxALIGN_RIGHT, 10);
+    windSelectBox->Add(windChoice, 0, wxTOP | wxRIGHT | wxLEFT, 10);
 
     return windSelectBox;
 }
@@ -69,7 +69,7 @@ wxBoxSizer *ControlPanel::BuildWindSpeedSlider() {
     wxBoxSizer *windSpeedBox = new wxBoxSizer(wxVERTICAL);
 
     wxStaticText *windSpeedLabel = new wxStaticText(this, wxID_ANY, wxT("Wind speed"));
-    windSpeedBox->Add(windSpeedLabel, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 10);
+    windSpeedBox->Add(windSpeedLabel, 0, wxALL, 10);
 
     windSpeedSlider = new wxSlider(
         this, idSliderWindSpeed, 2, 2, 8, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL | wxSL_LABELS | wxSL_TOP);
@@ -88,7 +88,7 @@ wxBoxSizer *ControlPanel::BuildGenerateForestButton() {
         wxEVT_COMMAND_BUTTON_CLICKED,
         wxCommandEventHandler(ControlPanel::OnGenerateForest)
     );
-    generateForestButtonBox->Add(startButton, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 10);
+    generateForestButtonBox->Add(startButton, 0, wxALL, 10);
 
     return generateForestButtonBox;
 }

@@ -2,6 +2,7 @@
  * Copyright 2016 Damian Glinkowski <damianglinkowski@gmail.com>
  */
 
+#include <Windows.h>
 #include "./Graph.h"
 #include "./Empty.h"
 #include "../Forest/Cell.h"
@@ -35,7 +36,7 @@ template<class V, class E>
 void Graph<V, E>::bfs(int source) {
     resetVerticesForBfs(source);
 
-    int queue[SIZE(vertices)];
+    int* queue = new int[SIZE(vertices)];
     int b = 0;
     int e = 0;
 
