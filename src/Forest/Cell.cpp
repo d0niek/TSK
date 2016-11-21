@@ -76,7 +76,7 @@ wxString &operator<<(wxString &s, const Cell &cell) {
     s << "Point " << cell.GetPoint() << "\n";
     s << "Width " << cell.GetWidth() << ", " << "Height " << cell.GetHeight() << "\n";
     s << "Color (rgba) ";
-    s << color.r << ", " << color.g << ", " << color.b << color.a;
+    s << color.r << ", " << color.g << ", " << color.b << ", " << color.a;
 
     return s;
 }

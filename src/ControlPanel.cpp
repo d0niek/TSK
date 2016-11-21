@@ -121,15 +121,22 @@ void ControlPanel::ResetForestCellsPointAndSize(float width, float height) {
 
 void ControlPanel::OnStart(wxCommandEvent &event) {
     if (IsForestGenerated() && !IsStart()) {
+        wxPuts("Start");
         start = true;
 
         int centralCell = (CELLS_PER_ROW / 2 * CELLS_PER_COLUMN) + (CELLS_PER_COLUMN / 2);
-        forest.bfs(centralCell);
+        burnForestThread = new BurnForestThread(forest, centralCell);
+        burnForestThread->Create();
+        burnForestThread->Run();
     }
 }
 
 void ControlPanel::OnReset(wxCommandEvent &event) {
     start = false;
+
+    if (burnForestThread->IsAlive()) {
+        burnForestThread->Kill();
+    }
 
     if (IsForestGenerated()) {
         GenerateForest();

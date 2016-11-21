@@ -3,6 +3,8 @@
  */
 
 #include "./Graph.h"
+
+#include <wx/thread.h>
 #include "./Empty.h"
 #include "../Forest/Cell.h"
 
@@ -45,6 +47,12 @@ void Graph<V, E>::bfs(int source) {
         source = queue[b++];
 
         vertices[source].SetColor(Color(255.0f, 0.0f, 0.0f));
+
+        wxThread::Sleep(200);
+
+        wxString ws;
+        ws << "Bfs " << vertices[source].GetColor();
+        wxPuts(ws);
 
         for (auto it = vertices[source].begin(); it != vertices[source].end(); it++) {
             if (vertices[it->vertex].t == -1) {

@@ -21,7 +21,7 @@ struct Graph {
         int vertex;
         int rev;
 
-        Edge(E e, int vertex);
+        Edge(E e, int v);
     };
 
     struct Vertex : public V, public std::vector<Edge> {

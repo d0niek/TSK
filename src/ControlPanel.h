@@ -9,6 +9,7 @@
 #include "./Forest/Cell.h"
 #include "./Forest/ForestGenerator.h"
 #include "./Graph/Graph.h"
+#include "./BurnForestThread.h"
 
 class ControlPanel : public wxPanel {
     private:
@@ -17,6 +18,7 @@ class ControlPanel : public wxPanel {
         wxSlider *windSpeedSlider;
         ForestGenerator *forestGenerator;
         Graph<Cell, Empty> forest;
+        BurnForestThread *burnForestThread;
 
         wxBoxSizer *BuildControlButtons();
         wxBoxSizer *BuildWindDirectionSelect();

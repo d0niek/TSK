@@ -9,11 +9,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/Graph/Graph.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ViewWindow.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/RenderTimer.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/BurnForestThread.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Forest/ForestGenerator.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Forest/Cell.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Forest/Cell.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Forest/ForestGenerator.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Forest/Cell.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Forest/Cell.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ViewWindow.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/BurnForestThread.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/RenderTimer.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Util/Color.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Util/Color.h" isTestSource="false" />

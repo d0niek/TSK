@@ -46,8 +46,15 @@ void ViewWindow::Render() {
     Prepare2DViewport(0, 0, GetWidth(), GetHeight());
     glLoadIdentity();
 
-    for (auto cellIt = GetForest().vertices.begin(); cellIt != GetForest().vertices.end(); cellIt++) {
+    int i = 0;
+    for (auto cellIt = GetForest().vertices.begin(); cellIt != GetForest().vertices.end(); cellIt++, i++) {
         cellIt->Render();
+
+        if (i == 2745 && IsStart()) {
+            wxString ws;
+            ws << "Render " << cellIt->GetColor();
+            wxPuts(ws);
+        }
     }
 
     glFlush();
