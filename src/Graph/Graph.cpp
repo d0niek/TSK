@@ -32,8 +32,8 @@ void Graph<V, E>::edgeUndirected(int vertex_1, int vertex_2, E edge) {
 }
 
 template<class V, class E>
-void Graph<V, E>::bfs(int source) {
-    resetVerticesForBfs(source);
+void Graph<V, E>::bfs(int source, int depth) {
+    ResetVerticesForBfs(source);
 
     int queue[SIZE(vertices)];
     int b = 0;
@@ -42,6 +42,10 @@ void Graph<V, E>::bfs(int source) {
     queue[0] = source;
 
     while (b <= e) {
+        if (vertices[source].t >= depth) {
+            break;
+        }
+
         source = queue[b++];
 
         vertices[source].SetColor(Color(255.0f, 0.0f, 0.0f));
@@ -58,7 +62,7 @@ void Graph<V, E>::bfs(int source) {
 }
 
 template<class V, class E>
-void Graph<V, E>::resetVerticesForBfs(int source) {
+void Graph<V, E>::ResetVerticesForBfs(int source) {
     for (auto it = vertices.begin(); it != vertices.end(); it++) {
         it->t = -1;
         it->s = -1;

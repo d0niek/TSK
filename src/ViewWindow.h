@@ -15,6 +15,10 @@ class ViewWindow : public wxGLCanvas {
     private:
         wxPanel *parent;
         wxGLContext *glContext;
+        wxStopWatch watch;
+        long time;
+        const long deltaTime = 1000;
+        int depth;
 
         bool IsStart();
         const Graph<Cell, Empty> &GetForest() const;

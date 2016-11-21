@@ -18,6 +18,8 @@ ViewWindow::ViewWindow(wxPanel *parent, int *args)
     this->parent = parent;
 
     glContext = new wxGLContext(this);
+    time = watch.Time();
+    depth = 1;
 
     // To avoid flashing on MSW
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
@@ -30,6 +32,13 @@ ViewWindow::~ViewWindow() {
 void ViewWindow::Update() {
     if (!IsStart()) {
         return;
+    }
+
+    if (watch.Time() - time > deltaTime) {
+        MainFrame *mainFrame = reinterpret_cast<MainFrame *>(parent->GetParent());
+        int centralCell = (CELLS_PER_ROW / 2 * CELLS_PER_COLUMN) + (CELLS_PER_COLUMN / 2);
+        mainFrame->GetControlPanel()->GetForest().bfs(centralCell, depth++);
+        time = watch.Time();
     }
 }
 

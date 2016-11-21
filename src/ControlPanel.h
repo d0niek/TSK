@@ -10,6 +10,9 @@
 #include "./Forest/ForestGenerator.h"
 #include "./Graph/Graph.h"
 
+#define CELLS_PER_ROW 60
+#define CELLS_PER_COLUMN 90
+
 class ControlPanel : public wxPanel {
     private:
         wxPanel *parent;
@@ -45,7 +48,7 @@ class ControlPanel : public wxPanel {
         void OnWindSpeedSlider(wxScrollEvent &event);
         void OnGenerateForest(wxCommandEvent &event);
 
-        const Graph<Cell, Empty> &GetForest() const;
+        Graph<Cell, Empty> &GetForest();
 };
 
 #endif // CONTROLPANEL_H

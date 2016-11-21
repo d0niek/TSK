@@ -5,9 +5,6 @@
 #include "./ControlPanel.h"
 #include "../MainFrame.h"
 
-#define CELLS_PER_ROW 60
-#define CELLS_PER_COLUMN 90
-
 ControlPanel::ControlPanel(wxPanel *parent)
     : wxPanel(parent, wxID_ANY) {
 
@@ -122,9 +119,6 @@ void ControlPanel::ResetForestCellsPointAndSize(float width, float height) {
 void ControlPanel::OnStart(wxCommandEvent &event) {
     if (IsForestGenerated() && !IsStart()) {
         start = true;
-
-        int centralCell = (CELLS_PER_ROW / 2 * CELLS_PER_COLUMN) + (CELLS_PER_COLUMN / 2);
-        forest.bfs(centralCell);
     }
 }
 
@@ -145,6 +139,6 @@ void ControlPanel::OnGenerateForest(wxCommandEvent &event) {
     }
 }
 
-const Graph<Cell, Empty> &ControlPanel::GetForest() const {
+Graph<Cell, Empty> &ControlPanel::GetForest() {
     return forest;
 }

@@ -42,10 +42,10 @@ struct Graph {
      * int t - odległość wierzchołka od źródła wyszukiwania
      * int s - nr wierzchołka, z którego prowadzi znaleziona, najkrótsza trasa
      */
-    void bfs(int source);
+    void bfs(int source, int depth);
 
     private:
-        void resetVerticesForBfs(int source);
+        void ResetVerticesForBfs(int source);
 };
 
 #endif // GRAPTH_H
