@@ -22,7 +22,7 @@ class Cell {
         Cell(const Cell &cell);
 
         Cell &operator=(const Cell &cell);
-        void Render();
+        void Render() const;
 
         Vector2f GetPoint() const;
         void SetPoint(const Vector2f &color);

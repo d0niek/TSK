@@ -6,17 +6,24 @@
 #define CONTROLPANEL_H
 
 #include <wx/wx.h>
+#include "./Forest/Cell.h"
+#include "./Forest/ForestGenerator.h"
+#include "./Graph/Graph.h"
 
 class ControlPanel : public wxPanel {
     private:
         wxPanel *parent;
         bool start;
         wxSlider *windSpeedSlider;
+        ForestGenerator *forestGenerator;
+        Graph<Cell, Empty> forest;
 
         wxBoxSizer *BuildControlButtons();
         wxBoxSizer *BuildWindDirectionSelect();
         wxBoxSizer *BuildWindSpeedSlider();
         wxBoxSizer *BuildGenerateForestButton();
+
+        void GenerateForest();
 
     public:
         enum {
@@ -29,12 +36,16 @@ class ControlPanel : public wxPanel {
         ControlPanel(wxPanel *parent);
 
         bool IsStart();
+        bool IsForestGenerated();
+        void ResetForestCellsPointAndSize(float width, float height);
 
         // events
         void OnStart(wxCommandEvent &event);
         void OnReset(wxCommandEvent &event);
         void OnWindSpeedSlider(wxScrollEvent &event);
         void OnGenerateForest(wxCommandEvent &event);
+
+        const Graph<Cell, Empty> &GetForest() const;
 };
 
 #endif // CONTROLPANEL_H

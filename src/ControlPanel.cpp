@@ -5,6 +5,9 @@
 #include "./ControlPanel.h"
 #include "../MainFrame.h"
 
+#define CELLS_PER_ROW 60
+#define CELLS_PER_COLUMN 90
+
 ControlPanel::ControlPanel(wxPanel *parent)
     : wxPanel(parent, wxID_ANY) {
 
@@ -24,6 +27,9 @@ ControlPanel::ControlPanel(wxPanel *parent)
 
     wxBoxSizer *generateForestButtonBox = BuildGenerateForestButton();
     menuBox->Add(generateForestButtonBox);
+
+    forestGenerator = new ForestGenerator(CELLS_PER_ROW, CELLS_PER_COLUMN);
+    forest = Graph<Cell, Empty>(0);
 
     SetSizer(menuBox);
 }
@@ -97,21 +103,36 @@ bool ControlPanel::IsStart() {
     return start;
 }
 
-void ControlPanel::OnStart(wxCommandEvent &event) {
-    start = true;
+bool ControlPanel::IsForestGenerated() {
+    return (bool) forest.vertices.size();
+}
 
+void ControlPanel::GenerateForest() {
     MainFrame *mainFrame = reinterpret_cast<MainFrame *>(parent->GetParent());
-    if (mainFrame->GetViewWindow()->IsForestGenerated()) {
-        mainFrame->GetViewWindow()->BurnForest();
+    forest = forestGenerator->Generate(
+        mainFrame->GetViewWindow()->GetWidth(),
+        mainFrame->GetViewWindow()->GetHeight()
+    );
+}
+
+void ControlPanel::ResetForestCellsPointAndSize(float width, float height) {
+    forestGenerator->ResetCellPointAndSize(forest, width, height);
+}
+
+void ControlPanel::OnStart(wxCommandEvent &event) {
+    if (IsForestGenerated() && !IsStart()) {
+        start = true;
+
+        int centralCell = (CELLS_PER_ROW / 2 * CELLS_PER_COLUMN) + (CELLS_PER_COLUMN / 2);
+        forest.bfs(centralCell);
     }
 }
 
 void ControlPanel::OnReset(wxCommandEvent &event) {
     start = false;
 
-    MainFrame *mainFrame = reinterpret_cast<MainFrame *>(parent->GetParent());
-    if (mainFrame->GetViewWindow()->IsForestGenerated()) {
-        mainFrame->GetViewWindow()->GenerateForest();
+    if (IsForestGenerated()) {
+        GenerateForest();
     }
 }
 
@@ -119,8 +140,11 @@ void ControlPanel::OnWindSpeedSlider(wxScrollEvent &event) {
 }
 
 void ControlPanel::OnGenerateForest(wxCommandEvent &event) {
-    MainFrame *mainFrame = reinterpret_cast<MainFrame *>(parent->GetParent());
     if (!IsStart()) {
-        mainFrame->GetViewWindow()->GenerateForest();
+        GenerateForest();
     }
+}
+
+const Graph<Cell, Empty> &ControlPanel::GetForest() const {
+    return forest;
 }

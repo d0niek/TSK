@@ -27,7 +27,7 @@ Cell &Cell::operator=(const Cell &cell) {
     return *this;
 }
 
-void Cell::Render() {
+void Cell::Render() const {
     glColor4f(color.r, color.g, color.b, color.a);
 
     glBegin(GL_QUADS);

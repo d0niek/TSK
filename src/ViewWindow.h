@@ -8,27 +8,24 @@
 #include <wx/wx.h>
 #include <wx/glcanvas.h>
 #include "./Forest/Cell.h"
-#include "./Forest/ForestGenerator.h"
 #include "./Graph/Graph.h"
+#include "./Graph/Empty.h"
 
 class ViewWindow : public wxGLCanvas {
     private:
         wxPanel *parent;
         wxGLContext *glContext;
-        ForestGenerator *forestGenerator;
-        Graph<Cell, Empty> forest;
+
+        bool IsStart();
+        const Graph<Cell, Empty> &GetForest() const;
+        void Prepare2DViewport(int topleft_x, int topleft_y, int bottomrigth_x, int bottomrigth_y);
 
     public:
         ViewWindow(wxPanel *parent, int *args);
         virtual ~ViewWindow();
 
-        void GenerateForest();
-        bool IsForestGenerated();
-        void BurnForest();
         void Update();
         void Render();
-        void Prepare2DViewport(int topleft_x, int topleft_y, int bottomrigth_x, int bottomrigth_y);
-        bool IsStart();
         int GetWidth();
         int GetHeight();
 

@@ -7,9 +7,6 @@
 #include <GL/glu.h>
 #include "../MainFrame.h"
 
-#define CELLS_PER_ROW 60
-#define CELLS_PER_COLUMN 90
-
 BEGIN_EVENT_TABLE(ViewWindow, wxGLCanvas)
         EVT_PAINT(ViewWindow::OnIdle)
         EVT_SIZE(ViewWindow::OnResize)
@@ -24,26 +21,10 @@ ViewWindow::ViewWindow(wxPanel *parent, int *args)
 
     // To avoid flashing on MSW
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
-
-    forestGenerator = new ForestGenerator(CELLS_PER_ROW, CELLS_PER_COLUMN);
-    forest = Graph<Cell, Empty>(0);
 }
 
 ViewWindow::~ViewWindow() {
     delete glContext;
-}
-
-void ViewWindow::GenerateForest() {
-    forest = forestGenerator->Generate(GetWidth(), GetHeight());
-}
-
-bool ViewWindow::IsForestGenerated() {
-    return (bool) forest.vertices.size();
-}
-
-void ViewWindow::BurnForest() {
-    int source = (CELLS_PER_ROW / 2 * CELLS_PER_COLUMN) + (CELLS_PER_COLUMN / 2);
-    forest.bfs(source);
 }
 
 void ViewWindow::Update() {
@@ -65,7 +46,7 @@ void ViewWindow::Render() {
     Prepare2DViewport(0, 0, GetWidth(), GetHeight());
     glLoadIdentity();
 
-    for (auto cellIt = forest.vertices.begin(); cellIt != forest.vertices.end(); cellIt++) {
+    for (auto cellIt = GetForest().vertices.begin(); cellIt != GetForest().vertices.end(); cellIt++) {
         cellIt->Render();
     }
 
@@ -98,6 +79,11 @@ bool ViewWindow::IsStart() {
     return mainFrame->GetControlPanel()->IsStart();
 }
 
+const Graph<Cell, Empty> &ViewWindow::GetForest() const {
+    MainFrame *mainFrame = reinterpret_cast<MainFrame *>(parent->GetParent());
+    return mainFrame->GetControlPanel()->GetForest();
+}
+
 int ViewWindow::GetWidth() {
     return GetSize().x;
 }
@@ -112,8 +98,9 @@ void ViewWindow::OnIdle(wxPaintEvent &event) {
 }
 
 void ViewWindow::OnResize(wxSizeEvent &evt) {
-    if (IsForestGenerated()) {
-        forestGenerator->ResetCellPointAndSize(forest, GetWidth(), GetHeight());
+    MainFrame *mainFrame = reinterpret_cast<MainFrame *>(parent->GetParent());
+    if (mainFrame->GetControlPanel()->IsForestGenerated()) {
+        mainFrame->GetControlPanel()->ResetForestCellsPointAndSize(GetWidth(), GetHeight());
     }
 
     Refresh();
