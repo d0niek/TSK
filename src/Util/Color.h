@@ -21,12 +21,15 @@ struct Color {
     Color(const Color &color);
     Color &operator=(const Color &color);
 
+    Color operator+(const Color &color);
+    Color &operator+=(const Color &color);
     bool operator==(const Color &rhs) const;
     bool operator!=(const Color &rhs) const;
     bool operator<(const Color &rhs) const;
     bool operator>(const Color &rhs) const;
     bool operator<=(const Color &rhs) const;
     bool operator>=(const Color &rhs) const;
+
 };
 
 wxString &operator<<(wxString &s, const Color &color);

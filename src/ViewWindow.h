@@ -18,11 +18,11 @@ class ViewWindow : public wxGLCanvas {
         wxStopWatch watch;
         long time;
         const long deltaTime = 1000;
-        int depth;
 
         bool IsStart();
-        const Graph<Cell, Empty> &GetForest() const;
+        Graph<Cell, Empty> &GetForest();
         void Prepare2DViewport(int topleft_x, int topleft_y, int bottomrigth_x, int bottomrigth_y);
+        void UpdateForestCells();
 
     public:
         ViewWindow(wxPanel *parent, int *args);

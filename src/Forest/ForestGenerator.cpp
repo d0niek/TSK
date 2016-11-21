@@ -34,7 +34,7 @@ void ForestGenerator::CalculateCellWidthAndHeight(float width, float height) {
 
 void ForestGenerator::SetCellPointAndSize(Graph<Cell, Empty>::Vertex &vertex, int row, int col) {
     Vector2f point(col * cellWidth + col, row * cellHeight + row);
-    Color color(0.0f, 255.0f, 0.0f, 1.0f);
+    Color color(0.0f, 1.0f, 0.0f, 1.0f);
 
     vertex.SetPoint(point);
     vertex.SetWidth(cellWidth);

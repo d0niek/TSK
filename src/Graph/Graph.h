@@ -25,8 +25,6 @@ struct Graph {
     };
 
     struct Vertex : public V, public std::vector<Edge> {
-        int t;
-        int s;
     };
 
     std::vector<Vertex> vertices;
@@ -34,18 +32,6 @@ struct Graph {
     Graph(int vertices = 0);
 
     void edgeUndirected(int vertex_1, int vertex_2, E edge = E());
-
-    /**
-     * Przeszukiwanie grafu wszerz.
-     *
-     * Wierzchołek musi zawierać dodatkowe informacje:
-     * int t - odległość wierzchołka od źródła wyszukiwania
-     * int s - nr wierzchołka, z którego prowadzi znaleziona, najkrótsza trasa
-     */
-    void bfs(int source, int depth);
-
-    private:
-        void ResetVerticesForBfs(int source);
 };
 
 #endif // GRAPTH_H

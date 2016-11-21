@@ -4,6 +4,7 @@
 
 #include "./ControlPanel.h"
 #include "../MainFrame.h"
+#include <random>
 
 ControlPanel::ControlPanel(wxPanel *parent)
     : wxPanel(parent, wxID_ANY) {
@@ -110,6 +111,13 @@ void ControlPanel::GenerateForest() {
         mainFrame->GetViewWindow()->GetWidth(),
         mainFrame->GetViewWindow()->GetHeight()
     );
+
+    std::random_device rd;
+    std::mt19937 eng(rd());
+    std::uniform_int_distribution<> distr(0, CELLS_PER_ROW * CELLS_PER_COLUMN);
+
+    forest.vertices[distr(eng)].SetColor(Color(0.85f, 0.94f, 0.05f));
+    forest.vertices[distr(eng)].SetColor(Color(0.85f, 0.94f, 0.05f));
 }
 
 void ControlPanel::ResetForestCellsPointAndSize(float width, float height) {

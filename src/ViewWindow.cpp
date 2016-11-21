@@ -19,7 +19,6 @@ ViewWindow::ViewWindow(wxPanel *parent, int *args)
 
     glContext = new wxGLContext(this);
     time = watch.Time();
-    depth = 1;
 
     // To avoid flashing on MSW
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
@@ -35,10 +34,23 @@ void ViewWindow::Update() {
     }
 
     if (watch.Time() - time > deltaTime) {
-        MainFrame *mainFrame = reinterpret_cast<MainFrame *>(parent->GetParent());
-        int centralCell = (CELLS_PER_ROW / 2 * CELLS_PER_COLUMN) + (CELLS_PER_COLUMN / 2);
-        mainFrame->GetControlPanel()->GetForest().bfs(centralCell, depth++);
+        UpdateForestCells();
         time = watch.Time();
+    }
+}
+
+void ViewWindow::UpdateForestCells() {
+    Graph<Cell, Empty> &rForest = GetForest();
+    Graph<Cell, Empty> forest = GetForest();
+
+    for (int i = 0; i < forest.vertices.size(); i++) {
+        Color color;
+
+        for (auto edgeIt = forest.vertices[i].begin(); edgeIt != forest.vertices[i].end(); edgeIt++) {
+            color += forest.vertices[edgeIt->vertex].GetColor();
+        }
+
+        rForest.vertices[i].SetColor(color);
     }
 }
 
@@ -88,7 +100,7 @@ bool ViewWindow::IsStart() {
     return mainFrame->GetControlPanel()->IsStart();
 }
 
-const Graph<Cell, Empty> &ViewWindow::GetForest() const {
+Graph<Cell, Empty> &ViewWindow::GetForest() {
     MainFrame *mainFrame = reinterpret_cast<MainFrame *>(parent->GetParent());
     return mainFrame->GetControlPanel()->GetForest();
 }
